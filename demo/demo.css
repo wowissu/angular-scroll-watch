@@ -4,11 +4,13 @@
     left: 200px;
     background: #ddd;
     color: #333;
+
+}
+.fixed table {
     border: 1px solid #333;
     width: 300px;
 }
-
-.fixed td {
+.fixed table td {
     border-bottom: 1px solid #333;
     /*border-right: 1px solid #333;*/
 }

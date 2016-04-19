@@ -7,20 +7,20 @@
 
     "use strict";
 
-    var app = angular.module('scrollPoint', []);
+    var app = angular.module('scrollWatch', []);
 
-    app.factory('ScrollPoint', ['$rootScope', function ($rootScope) {
+    app.factory('ScrollWatch', ['$rootScope', function ($rootScope) {
 
         var doc = document.documentElement;
 
-        var ScrollPoint = function (target, $useScope) {
+        var ScrollWatch = function (target, $useScope) {
             this.funcPointer = {};
             this.topPinter = {};
             this.bottomPointer = {};
             this.target = $(target);
 
             this.scope = $useScope || $rootScope;
-            this.scope.ScrollPoint = this;
+            this.scope.ScrollWatch = this;
             this.scope.$$point = {};
 
             var scope = this.scope;
@@ -45,17 +45,12 @@
             }
         };
 
-        ScrollPoint.prototype.watchPoint = function (point, callback) {
-
-            if (point in this.scope.$$point) {
-                var pointWatch = '$$point.' + point;
-                this.scope.$watch(pointWatch, callback);
-            }
-
+        ScrollWatch.prototype.watchPoint = function (point, callback) {
+            this.scope.$watch('$$point.' + point, callback);
             return this;
         };
 
-        ScrollPoint.prototype.updatePoint = function (scrollTop, scrollBottom) {
+        ScrollWatch.prototype.updatePoint = function (scrollTop, scrollBottom) {
 
             var scope = this.scope;
 
@@ -75,7 +70,7 @@
             return this;
         };
 
-        ScrollPoint.prototype.addPoint = function (name, point, bottom) {
+        ScrollWatch.prototype.addPoint = function (name, point, bottom) {
             if (typeof point === 'function') {
                 this.funcPointer[name] = point;
             } else if (bottom) {
@@ -87,16 +82,14 @@
             return this;
         };
 
-        return ScrollPoint;
+        return ScrollWatch;
     }]);
 
     app.directive('scrollPoint', ['$timeout', function ($timeout) {
-
         var getPos = function (el) {
             for (var lx = 0, ly = 0;el != null;lx += el.offsetLeft, ly += el.offsetTop, el = el.offsetParent);
             return {left: lx, top: ly};
         };
-
         return {
             restrict: 'A',
             link: function ($scope, $element, $attrs) {
@@ -105,16 +98,16 @@
                         console.error('require point name.');
                         return;
                     }
-                    if (!$scope.ScrollPoint) {
-                        console.error('undefined ScrollPoint object.');
+                    if (!$scope.ScrollWatch) {
+                        console.error('undefined ScrollWatch object.');
                         return;
                     }
                     if ('bottom' in $attrs) {
-                        $scope.ScrollPoint.addPoint($attrs.scrollPoint, function (scrollTop, scrollBottom) {
+                        $scope.ScrollWatch.addPoint($attrs.scrollPoint, function (scrollTop, scrollBottom) {
                             return scrollBottom > getPos($element[0]).top;
                         });
                     } else {
-                        $scope.ScrollPoint.addPoint($attrs.scrollPoint, function (scrollTop) {
+                        $scope.ScrollWatch.addPoint($attrs.scrollPoint, function (scrollTop) {
                             return scrollTop > getPos($element[0]).top;
                         });
                     }

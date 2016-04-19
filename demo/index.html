@@ -5,14 +5,14 @@
     <title>Document</title>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.min.js"></script>
     <script src="https://code.jquery.com/jquery-2.2.3.min.js"></script>
-    <script src="../scrollpoint.su.js"></script>
+    <script src="../scrollwatch.su.js"></script>
 
     <link rel="stylesheet" href="demo.css">
 </head>
 <body ng-app="app" ng-controller="appCtrl">
 
-    <div >
-        <table class="fixed" >
+    <div class="fixed">
+        <table  >
             <tbody>
                 <tr>
                     <td>top</td>
@@ -41,9 +41,9 @@
                     <td>{{ $$point.bottomPoint }}</td>
                 </tr>
 
-
             </tbody>
         </table>
+        <div ng-show="$$scrollBottom > 1200" >show me when scroll bottom over 500px</div>
     </div>
 
     <ul>
@@ -153,16 +153,15 @@
         (function () {
             "use strict";
 
-            var app = angular.module('app', ['scrollPoint']);
+            var app = angular.module('app', ['scrollWatch']);
 
-            app.controller('appCtrl', ['$scope', 'ScrollPoint', function ($scope, ScrollPoint) {
+            app.controller('appCtrl', ['$scope', 'ScrollWatch', function ($scope, ScrollWatch) {
                 console.info('app init');
-
-                new ScrollPoint(window, $scope)
+                new ScrollWatch(window, $scope)
                         .addPoint('myPointTop', 500)
                         .addPoint('myPointbottom', 1200, true)
-                        .watchPoint('myPointTop', function (val) {
-                            console.log(val);
+                        .watchPoint('topPoint', function (val) {
+                            console.log('watch topPoint status: ', val);
                         });
             }]);
         }());
