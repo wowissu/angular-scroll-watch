@@ -59,9 +59,7 @@ $scope.$$point // true , false
 ```
 
 在 $$point 中可以找到定義好的 point，他會是一個布林值
-
 <br/>
-
 第三個參數帶 true，就可以檢查 scroll bottom
 
 ```js
