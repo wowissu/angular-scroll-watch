@@ -43,7 +43,7 @@ Basic use
             //default scrollElement is window
             //default scope is $rootScope
 
-        // also define it by youself
+        // also define it by yourself
         var myWatch = new ScrollWatch('#scrollElement', $scope);
     };
 ```
