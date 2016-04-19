@@ -39,7 +39,12 @@ Basic use
     var app = angular.module('app', ['scrollWatch']);
     // ...
     app.controller('appCtrl', ['$scope', 'ScrollWatch', function ($scope, ScrollWatch) {
-        var myWatch = new ScrollWatch(window, $scope);
+        var myWatch = new ScrollWatch();
+            //default scrollElement is window
+            //default scope is $rootScope
+
+        // also define it by youself
+        var myWatch = new ScrollWatch('#scrollElement', $scope);
     };
 ```
 
@@ -65,7 +70,7 @@ $scope.$$point.myPoint // find point in $$point , it will be boolean
 * Also use callback
 
 ```js
-    myWatch.addPoint('myBottomPoint', function (top, bottom) {
+    myWatch.addPoint('myPoint', function (top, bottom) {
         return top > 500;
     });
 ```
