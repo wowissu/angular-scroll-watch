@@ -31,7 +31,12 @@ angular scroll watch
     </body>
 ```
 
+- - -
+- - -
+
 ## JS
+
+基本使用
 
 ```js
     var app = angular.module('app', ['scrollPoint']);
@@ -41,10 +46,11 @@ angular scroll watch
     };
 ```
 
+- - -
+
+#### 新增一個檢查點
+
 ###### addPoint (pointName, integer || callback, watchScrollBottom = false)
-
-新增一個檢查點
-
 ```js
     scrollpoint.addPoint('myPoint', 500);
 ```
@@ -65,10 +71,11 @@ angular scroll watch
     });
 ```
 
+- - -
+
+#### 監控某個點的變化
+
 ###### watchPoint (pointName, callback)
-
-監控某個點的變化
-
 ```js
     scrollpoint.watchPoint('topPoint', function (val) {
         console.log('watch topPoint status: ', val);
