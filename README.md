@@ -61,7 +61,7 @@ $scope.$$point.myPoint // find point in $$point , it will be boolean
 
 ```
 
-* If third paramter is true，then check point by scroll bottom
+* If third parameter is `true`,then check point on scroll bottom
 
 ```js
     myWatch.addPoint('myBottomPoint', 500, true);
