@@ -47,14 +47,21 @@ angular-scroll-watch
 
 - - -
 
-#### 新增一個檢查點
+#### 新增檢查點
 
 ###### addPoint (pointName, integer || callback, watchScrollBottom = false)
 ```js
-    scrollpoint.addPoint('myPoint', 500);
+
+scrollpoint.addPoint('myPoint', 500);
+
+$scope.$$point // true , false
+
 ```
 
-在 $scope.$$point 中可以找到你的 point，他會是 true 或 false
+在 $$point 中可以找到定義好的 point，他會是一個布林值
+
+<br/>
+
 第三個參數帶 true，就可以檢查 scroll bottom
 
 ```js
@@ -62,7 +69,6 @@ angular-scroll-watch
 ```
 
 也可以用 callback 自己檢查
-
 
 ```js
     scrollpoint.addPoint('myBottomPoint', function (top, bottom) {
@@ -72,7 +78,7 @@ angular-scroll-watch
 
 - - -
 
-#### 監控某個點的變化
+#### 監控檢查點
 
 ###### watchPoint (pointName, callback)
 ```js
