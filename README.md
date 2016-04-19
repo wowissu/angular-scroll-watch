@@ -38,8 +38,8 @@ $scope.$$point.myPoint // find point in $$point , it will be boolean
 * Also use callback
 
 ```js
-    myWatch.addPoint('myPoint', function (top, bottom) {
-        return top > 500;
+    myWatch.addPoint('myPoint', function (scroll) {
+        return scroll.top > 500;
     });
 ```
 

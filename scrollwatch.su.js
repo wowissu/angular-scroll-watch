@@ -1,10 +1,21 @@
 /**
     Version: 1.0.0
-    Author: adam su
+    Author: wowissu
+    Angular: 1.4.*
+    github: https://github.com/wowissu/angular-scroll-watch
  */
+/*global arguments, window, $, angular */
+/*jslint this:true */
+/*property
+    $$point, $$scrollBottom, $$scrollTop, $applyAsync, $watch, ScrollWatch,
+    addPoint, bottomPointer, clientHeight, clientTop, directive,
+    documentElement, factory, funcPointer, innerHeight, module, offsetHeight,
+    on, pageYOffset, prototype, scope, scrollTop, target, topPinter,
+    updatePoint, watchPoint, forEach, restrict, link, scrollPoint, error,
+    hasOwnProperty, offsetLeft, offsetTop, offsetParent, left, top, bottom
+*/
 
 (function () {
-
     "use strict";
 
     var app = angular.module('scrollWatch', []);
@@ -14,31 +25,32 @@
         var doc = document.documentElement;
 
         var ScrollWatch = function (target, $useScope) {
-            this.funcPointer = {};
-            this.topPinter = {};
-            this.bottomPointer = {};
-            this.target = $(target);
 
-            this.scope = $useScope || $rootScope;
-            this.scope.ScrollWatch = this;
-            this.scope.$$point = {};
-
-            var scope = this.scope;
-            var target = this.target;
             var self = this;
 
-            if (target[0] === window) {
-                target.on('scroll', function () {
+            self.funcPointer = {};
+            self.topPinter = {};
+            self.bottomPointer = {};
+            self.target = $(target);
+
+            self.scope = $useScope || $rootScope;
+            self.scope.ScrollWatch = self;
+            self.scope.$$point = {};
+
+            var scope = self.scope;
+
+
+            if (self.target[0] === window) {
+                self.target.on('scroll', function () {
                     self.updatePoint(
                         (this.pageYOffset || doc.scrollTop) - (doc.clientTop || 0),
                         scope.$$scrollTop + this.innerHeight
                     );
-
                 });
             } else {
-                target.on('scroll', function () {
+                self.target.on('scroll', function () {
                     self.updatePoint(
-                        this.scrollTop || target.scrollTop(),
+                        this.scrollTop || self.target.scrollTop(),
                         scope.$$scrollTop + (this.offsetHeight || this.clientHeight)
                     );
                 });
@@ -54,18 +66,21 @@
 
             var scope = this.scope;
 
-            scope.$$scrollTop    = scrollTop;
+            scope.$$scrollTop = scrollTop;
             scope.$$scrollBottom = scrollBottom;
 
-            for(name in this.topPinter) {
-                scope.$$point[name] = scrollTop > this.topPinter[name];
-            }
-            for(name in this.bottomPointer) {
-                scope.$$point[name] = scrollBottom >= this.bottomPointer[name];
-            }
-            for(name in this.funcPointer) {
-                scope.$$point[name] = !!this.funcPointer[name](scrollTop, scrollBottom);
-            }
+            angular.forEach(this.topPinter, function (point, name) {
+                scope.$$point[name] = scrollTop > point;
+            });
+            angular.forEach(this.bottomPointer, function (point, name) {
+                scope.$$point[name] = scrollBottom >= point;
+            });
+            angular.forEach(this.funcPointer, function (point, name) {
+                scope.$$point[name] = !!point({
+                    top: scrollTop,
+                    bottom: scrollBottom
+                });
+            });
             scope.$applyAsync();
             return this;
         };
@@ -87,7 +102,13 @@
 
     app.directive('scrollPoint', ['$timeout', function ($timeout) {
         var getPos = function (el) {
-            for (var lx = 0, ly = 0;el != null;lx += el.offsetLeft, ly += el.offsetTop, el = el.offsetParent);
+            var lx = 0;
+            var ly = 0;
+            while (el !== null) {
+                lx += el.offsetLeft;
+                ly += el.offsetTop;
+                el = el.offsetParent;
+            }
             return {left: lx, top: ly};
         };
         return {
@@ -102,13 +123,13 @@
                         console.error('undefined ScrollWatch object.');
                         return;
                     }
-                    if ('bottom' in $attrs) {
-                        $scope.ScrollWatch.addPoint($attrs.scrollPoint, function (scrollTop, scrollBottom) {
-                            return scrollBottom > getPos($element[0]).top;
+                    if ($attrs.hasOwnProperty('bottom')) {
+                        $scope.ScrollWatch.addPoint($attrs.scrollPoint, function (scroll) {
+                            return scroll.bottom > getPos($element[0]).top;
                         });
                     } else {
-                        $scope.ScrollWatch.addPoint($attrs.scrollPoint, function (scrollTop) {
-                            return scrollTop > getPos($element[0]).top;
+                        $scope.ScrollWatch.addPoint($attrs.scrollPoint, function (scroll) {
+                            return scroll.top > getPos($element[0]).top;
                         });
                     }
                 });
