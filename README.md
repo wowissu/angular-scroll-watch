@@ -33,7 +33,7 @@ angular-scroll-watch
 
 ## JS
 
-基本使用
+Basic use
 
 ```js
     var app = angular.module('app', ['scrollWatch']);
@@ -45,24 +45,24 @@ angular-scroll-watch
 
 - - -
 
-#### 新增檢查點
+#### define watch point
 
 ###### addPoint (pointName, integer || callback, watchScrollBottom = false)
 ```js
 
 myWatch.addPoint('myPoint', 500);
 
-$scope.$$point.myPoint // 在 $$point 中可以找到定義好的 point，他會是一個布林值
+$scope.$$point.myPoint // find point in $$point , it will be boolean
 
 ```
 
-* 第三個參數帶 true，就可以檢查 scroll bottom
+* if third paramter is true，then check point by scroll bottom
 
 ```js
     myWatch.addPoint('myBottomPoint', 500, true);
 ```
 
-* 也可以用 callback 自己檢查
+* also use callback
 
 ```js
     myWatch.addPoint('myBottomPoint', function (top, bottom) {
@@ -72,7 +72,7 @@ $scope.$$point.myPoint // 在 $$point 中可以找到定義好的 point，他會
 
 - - -
 
-#### 監控檢查點
+#### Watch defined point
 
 ###### watchPoint (pointName, callback)
 ```js
