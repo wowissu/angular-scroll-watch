@@ -1,7 +1,5 @@
-# angular-scroll-point
-
-angular scroll watch
-
+angular-scroll-watch
+===================================
 
 ### watch scroll top or bottom
 
@@ -31,8 +29,9 @@ angular scroll watch
     </body>
 ```
 
-- - -
-- - -
+<br/>
+<br/>
+<br/>
 
 ## JS
 
