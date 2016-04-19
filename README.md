@@ -1,10 +1,6 @@
 angular-scroll-watch
 ===================================
 
-<br/>
-
-## JS
-
 Basic use
 
 ```js
