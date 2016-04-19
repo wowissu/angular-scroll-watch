@@ -1,10 +1,10 @@
 angular-scroll-watch
 ===================================
 
-### watch scroll top or bottom
+### Watch scroll top or bottom
 
-* when scrollTop > 500px , hide element.
-* when scrollBottom < 500px , show target element.
+* When scrollTop > 500px , hide element.
+* When scrollBottom < 500px , show target element.
 
 ```html
     <body ng-app="app" ng-controller="appCtrl">
@@ -15,10 +15,10 @@ angular-scroll-watch
     </body>
 ```
 
-### watch element
+### Watch Element
 
-* when scrollTop over myPoint1 element, $$point.myPoint1 = true.
-* when scrollBottom over myPoint2 element, $$point.myPoint2 = true.
+* When scrollTop over myPoint1 element, $$point.myPoint1 = true.
+* When scrollBottom over myPoint2 element, $$point.myPoint2 = true.
 
 ```html
     <body ng-app="app" ng-controller="appCtrl">
@@ -45,7 +45,7 @@ Basic use
 
 - - -
 
-#### define watch point
+#### Define watch point
 
 ###### addPoint (pointName, integer || callback, watchScrollBottom = false)
 ```js
@@ -56,13 +56,13 @@ $scope.$$point.myPoint // find point in $$point , it will be boolean
 
 ```
 
-* if third paramter is true，then check point by scroll bottom
+* If third paramter is true，then check point by scroll bottom
 
 ```js
     myWatch.addPoint('myBottomPoint', 500, true);
 ```
 
-* also use callback
+* Also use callback
 
 ```js
     myWatch.addPoint('myBottomPoint', function (top, bottom) {
