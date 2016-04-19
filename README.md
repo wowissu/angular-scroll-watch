@@ -3,10 +3,10 @@
 angular scroll watch
 
 
-## watch scroll top or bottom
+### watch scroll top or bottom
 
-1. when scrollTop > 500px , hide element.
-2. when scrollBottom < 500px , show target element.
+* when scrollTop > 500px , hide element.
+* when scrollBottom < 500px , show target element.
 
 ```html
     <body ng-app="app" ng-controller="appCtrl">
@@ -17,10 +17,10 @@ angular scroll watch
     </body>
 ```
 
-## watch element
+### watch element
 
-1. when scrollTop over myPoint1 element, $$point.myPoint1 = true.
-2. when scrollBottom over myPoint2 element, $$point.myPoint2 = true.
+* when scrollTop over myPoint1 element, $$point.myPoint1 = true.
+* when scrollBottom over myPoint2 element, $$point.myPoint2 = true.
 
 ```html
     <body ng-app="app" ng-controller="appCtrl">
@@ -31,7 +31,7 @@ angular scroll watch
     </body>
 ```
 
-## 開始使用
+### javascript
 
 ```js
     var app = angular.module('app', ['scrollPoint']);
@@ -41,22 +41,23 @@ angular scroll watch
     };
 ```
 
-### addPoint (pointName, integer || callback, watchScrollBottom = false)
+###### addPoint (pointName, integer || callback, watchScrollBottom = false)
 
-新增一個檢查點
+    新增一個檢查點
 
 ```js
     scrollpoint.addPoint('myPoint', 500);
 ```
-在 $scope.$$point 中可以找到你的 point，他會是 true 或 false
 
-第三個參數帶 true，就可以檢查 scroll bottom
+    在 $scope.$$point 中可以找到你的 point，他會是 true 或 false
+    第三個參數帶 true，就可以檢查 scroll bottom
 
 ```js
     scrollpoint.addPoint('myBottomPoint', 500, true);
 ```
 
-也可以用 callback 自己檢查
+    也可以用 callback 自己檢查
+
 
 ```js
     scrollpoint.addPoint('myBottomPoint', function (top, bottom) {
@@ -64,9 +65,9 @@ angular scroll watch
     });
 ```
 
-### watchPoint (pointName, callback)
+###### watchPoint (pointName, callback)
 
-監控某個點的變化
+    監控某個點的變化
 
 ```js
     scrollpoint.watchPoint('topPoint', function (val) {
