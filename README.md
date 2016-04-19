@@ -36,10 +36,10 @@ angular-scroll-watch
 基本使用
 
 ```js
-    var app = angular.module('app', ['scrollPoint']);
+    var app = angular.module('app', ['scrollWatch']);
     // ...
-    app.controller('appCtrl', ['$scope', 'ScrollPoint', function ($scope, ScrollPoint) {
-        var scrollpoint = new ScrollPoint(window, $scope);
+    app.controller('appCtrl', ['$scope', 'ScrollWatch', function ($scope, ScrollWatch) {
+        var myWatch = new ScrollWatch(window, $scope);
     };
 ```
 
@@ -50,7 +50,7 @@ angular-scroll-watch
 ###### addPoint (pointName, integer || callback, watchScrollBottom = false)
 ```js
 
-scrollpoint.addPoint('myPoint', 500);
+myWatch.addPoint('myPoint', 500);
 
 $scope.$$point.myPoint // 在 $$point 中可以找到定義好的 point，他會是一個布林值
 
@@ -59,13 +59,13 @@ $scope.$$point.myPoint // 在 $$point 中可以找到定義好的 point，他會
 * 第三個參數帶 true，就可以檢查 scroll bottom
 
 ```js
-    scrollpoint.addPoint('myBottomPoint', 500, true);
+    myWatch.addPoint('myBottomPoint', 500, true);
 ```
 
 * 也可以用 callback 自己檢查
 
 ```js
-    scrollpoint.addPoint('myBottomPoint', function (top, bottom) {
+    myWatch.addPoint('myBottomPoint', function (top, bottom) {
         return top > 500;
     });
 ```
@@ -76,7 +76,7 @@ $scope.$$point.myPoint // 在 $$point 中可以找到定義好的 point，他會
 
 ###### watchPoint (pointName, callback)
 ```js
-    scrollpoint.watchPoint('topPoint', function (val) {
+    myWatch.watchPoint('topPoint', function (val) {
         console.log('watch topPoint status: ', val);
     });
 ```
