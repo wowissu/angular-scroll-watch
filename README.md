@@ -1,6 +1,6 @@
 # angular-scroll-point
 
-angular scroll watch point
+angular scroll watch
 
 
 ## watch scroll top or bottom
@@ -19,8 +19,8 @@ angular scroll watch point
 
 ## watch element
 
-when scrollTop over myPoint1 element, $$point.myPoint1 = true;
-when scrollBottom over myPoint2 element, $$point.myPoint2 = true;
+1. when scrollTop over myPoint1 element, $$point.myPoint1 = true.
+2. when scrollBottom over myPoint2 element, $$point.myPoint2 = true.
 
 ```html
     <body ng-app="app" ng-controller="appCtrl">
