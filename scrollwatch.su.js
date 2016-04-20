@@ -1,5 +1,5 @@
 /**
-    Version: 1.0.0
+    Version: 1.0.1
     Author: wowissu
     Angular: 1.4.*
     github: https://github.com/wowissu/angular-scroll-watch
