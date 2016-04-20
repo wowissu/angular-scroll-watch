@@ -66,6 +66,8 @@
 
             var scope = this.scope;
 
+            scope.$$scrollDown = scrollTop > scope.$$scrollTop;
+            scope.$$scrollUp = !scope.$$scrollDown;
             scope.$$scrollTop = scrollTop;
             scope.$$scrollBottom = scrollBottom;
 

@@ -86,3 +86,11 @@ $scope.$$point.myPoint // find point in $$point , it will be boolean
     </body>
 ```
 
+
+## Scroll up or down
+
+```html
+    <div ng-show="$$scrollUp">show me on scroll up</div>
+    <div ng-show="$$scrollDown">show me on scroll down</div>
+```
+
